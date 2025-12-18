@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timofei Polivanov | AI Engineer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300f0ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='4' y='4' width='16' height='16' rx='2' ry='2'></rect><rect x='9' y='9' width='6' height='6'></rect><line x1='9' y1='1' x2='9' y2='4'></line><line x1='15' y1='1' x2='15' y2='4'></line><line x1='9' y1='20' x2='9' y2='23'></line><line x1='15' y1='20' x2='15' y2='23'></line><line x1='20' y1='9' x2='23' y2='9'></line><line x1='20' y1='14' x2='23' y2='14'></line><line x1='1' y1='9' x2='4' y2='9'></line><line x1='1' y1='14' x2='4' y2='14'></line></svg>">
+</head>
+<body>
+
+    <canvas id="cv-canvas"></canvas>
+
+    <div class="content-wrapper">
+        
+        <nav>
+            <div class="logo">Plomitt</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <header id="about">
+            <div class="hero-text">
+                <span class="badge">AI Engineer & Software Developer</span>
+                <h1>Timofei Polivanov</h1>
+                <p>Specializing in Deep Learning, Computer Vision, and Robotics. Transforming prototypes from concept to deployment.</p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn primary">Get in Touch</a>
+                    <a href="https://github.com/plomitt" target="_blank" class="btn secondary"><i data-feather="github"></i> GitHub</a>
+                    <a href="https://www.linkedin.com/in/timofei-polivanov-767112314/" target="_blank" class="btn secondary"><i data-feather="linkedin"></i> LinkedIn</a>
+                </div>
+            </div>
+        </header>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="grid-3">
+                <div class="card static-card">
+                    <i data-feather="cpu" class="icon-accent"></i>
+                    <h3>AI & ML</h3>
+                    <p>Deep Learning, Computer Vision, NLP, LLM Integration, Feature Engineering.</p>
+                </div>
+                <div class="card static-card">
+                    <i data-feather="code" class="icon-accent"></i>
+                    <h3>Development</h3>
+                    <p>Python, C++, JavaScript (React, Node.js), Java, REST APIs, Docker, Git, Linux.</p>
+                </div>
+                <div class="card static-card">
+                    <i data-feather="tool" class="icon-accent"></i>
+                    <h3>Tools</h3>
+                    <p>PyTorch, TensorFlow, AWS, HuggingFace, ROS, OpenCV, Pandas, Scikit-learn.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Select Projects</h2>
+            <div class="grid-2">
+                
+                <!-- Project 1 -->
+                <a href="https://github.com/plomitt/sentiment_analysis" target="_blank" class="card-link">
+                    <div class="card interactive-card project-card">
+                        <div class="card-header">
+                            <h3>Bitcoin News Sentiment</h3>
+                            <span class="tag">NLP / RAG / Vector DB</span>
+                        </div>
+                        <p>Sentiment analysis of financial news using vector embeddings and structured LLM output. Fetches data from RSS/Websockets and stores results efficiently.</p>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="https://github.com/plomitt/struct_agent" target="_blank" class="card-link">
+                    <div class="card interactive-card project-card">
+                        <div class="card-header">
+                            <h3>StructAgent</h3>
+                            <span class="tag">AI Agent / Python</span>
+                        </div>
+                        <p>A small, simple, and structured AI agent with reasoning capabilities and tool integration. Built with modern Python patterns for extensibility.</p>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="card static-card list-container">
+                
+                <div class="timeline-item">
+                    <div class="date">Sep 2024 — Aug 2025</div>
+                    <div class="timeline-content">
+                        <h3>Software Engineer</h3>
+                        <h4>Plomitt · Self-employed, Amsterdam</h4>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="date">Sep 2024 — Dec 2024</div>
+                    <div class="timeline-content">
+                        <h3>Junior AI Engineer</h3>
+                        <h4>EVI Safety Technology, Amsterdam</h4>
+                        <p>Optimized and migrated the company’s AI-chatbot to a new LLM service, significantly reducing response latency and cutting API costs.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="date">Jan 2022 — Jun 2022</div>
+                    <div class="timeline-content">
+                        <h3>Microelectronics Eng. Technician</h3>
+                        <h4>Russian Quantum Center, Moscow</h4>
+                        <p>Developed signal-processing algorithms for next-gen LiDAR modules. Collaborated with hardware teams to integrate firmware tests.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="date">Apr 2021</div>
+                    <div class="timeline-content">
+                        <h3>App Software Developer</h3>
+                        <h4>QREPUBLIK, Moscow</h4>
+                        <p>Built and maintained responsive front-end features using React.js and REST APIs.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="card static-card list-container">
+                
+                <div class="timeline-item">
+                    <div class="date">Sep 2023 — Present</div>
+                    <div class="timeline-content">
+                        <h3>BSc Artificial Intelligence (Honours)</h3>
+                        <h4>Vrije Universiteit Amsterdam</h4>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="date">Sep 2025</div>
+                    <div class="timeline-content">
+                        <h3>Certified AI Agent Developer</h3>
+                        <h4>HuggingFace Certification</h4>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="date">Sep 2016 — Jun 2023</div>
+                    <div class="timeline-content">
+                        <h3>International Gymnasium</h3>
+                        <h4>Innovation Center Skolkovo, Moscow</h4>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="date">Sep 2022 — Jun 2023</div>
+                    <div class="timeline-content">
+                        <h3>The English School of Kyrenia</h3>
+                        <h4>Kyrenia</h4>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="date">Sep 2021 — Jun 2023</div>
+                    <div class="timeline-content">
+                        <h3>Physics & Math Advanced Level</h3>
+                        <h4>ZFTSH Extramural School, Moscow</h4>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="date">Sep 2019 — Jun 2021</div>
+                    <div class="timeline-content">
+                        <h3>Yandex Lyceum</h3>
+                        <h4>Online Programming School, Moscow</h4>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer id="contact">
+            <h2>Let's build something intelligent.</h2>
+            <p>Belgrade, Serbia</p>
+            
+            <a href="mailto:timofeipolivanov@gmail.com" class="email-link">timofeipolivanov@gmail.com</a>
+            
+            <div class="footer-btns">
+                <a href="https://github.com/plomitt" target="_blank" class="btn secondary"><i data-feather="github"></i> GitHub</a>
+                <a href="https://www.linkedin.com/in/timofei-polivanov-767112314/" target="_blank" class="btn secondary"><i data-feather="linkedin"></i> LinkedIn</a>
+            </div>
+
+            <p class="copyright">© 2025 Timofei Polivanov</p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
