@@ -5,40 +5,50 @@ let width, height;
 let entities = [];
 
 const config = {
-    entityCount: 15,
+    density: 110000, // 1 entity per this many px^2
+    minCount: 12,
+    maxCount: 32,
+    separation: 170, // px of personal space between entities
     scanSpeed: 2, 
     scanColor: '#00f0ff',
     baseColor: 'rgba(255, 255, 255, 0.2)',
-    // 8 Distinct Types
+    // 11 Distinct Types
     types: [
         { label: 'Car', icon: 'car' },
         { label: 'Person', icon: 'person' },
-        { label: 'Window', icon: 'box' },
         { label: 'Robot', icon: 'bot' },
         { label: 'Drone', icon: 'drone' },
         { label: 'Chip', icon: 'chip' },
         { label: 'Camera', icon: 'cam' },
-        { label: 'Phone', icon: 'phone' }
+        { label: 'Phone', icon: 'phone' },
+        { label: 'Satellite', icon: 'satellite' },
+        { label: 'Traffic Light', icon: 'trafficlight' },
+        { label: 'Bicycle', icon: 'bicycle' },
+        { label: 'Server', icon: 'server' }
     ]
 };
 
 function resize() {
+    const oldW = width, oldH = height;
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
+    // Rescale instead of respawning, so entities don't teleport on resize
+    if (oldW && oldH) entities.forEach(e => {
+        e.x *= width / oldW;
+        e.y *= height / oldH;
+    });
 }
 window.addEventListener('resize', resize);
 resize();
 
 class Entity {
-    constructor() {
+    constructor(x, y) {
         this.reset();
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
+        this.x = x;
+        this.y = y;
     }
 
     reset() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
         this.size = 30 + Math.random() * 30; // Icon size
         this.speedX = (Math.random() - 0.5) * 0.5;
         this.speedY = (Math.random() - 0.5) * 0.5;
@@ -52,8 +62,10 @@ class Entity {
         this.x += this.speedX;
         this.y += this.speedY;
 
-        if (this.x < 0 || this.x > width) this.speedX *= -1;
-        if (this.y < 0 || this.y > height) this.speedY *= -1;
+        if (this.x < 0) { this.x = 0; this.speedX = Math.abs(this.speedX); }
+        if (this.x > width - this.size) { this.x = width - this.size; this.speedX = -Math.abs(this.speedX); }
+        if (this.y < 0) { this.y = 0; this.speedY = Math.abs(this.speedY); }
+        if (this.y > height - this.size) { this.y = height - this.size; this.speedY = -Math.abs(this.speedY); }
     }
 
     draw(scanY) {
@@ -137,19 +149,6 @@ class Entity {
             ctx.moveTo(cx + r * 0.65 + wheelR, wheelY);
             ctx.arc(cx + r * 0.65, wheelY, wheelR, 0, Math.PI * 2);
         }
-        // 3. Box/window
-        else if (this.iconType === 'box') {
-            // Outer Box
-            ctx.rect(cx - r, cy - r, r * 2, r * 2);
-            
-            // Horizontal Line
-            ctx.moveTo(cx - r, cy); 
-            ctx.lineTo(cx + r, cy);
-            
-            // Vertical Line
-            ctx.moveTo(cx, cy - r); 
-            ctx.lineTo(cx, cy + r);
-        }
         // 4. Robot
         else if (this.iconType === 'bot') {
             ctx.rect(cx - r/1.5, cy - r/2, r*1.5, r);
@@ -210,6 +209,52 @@ class Entity {
             ctx.rect(cx - r/2, cy - r/1.2, r, r*1.5); // Screen
             ctx.moveTo(cx, cy + r/1.2); ctx.arc(cx, cy + r/1.2, 1, 0, Math.PI * 2); // Button
         }
+        // Satellite
+        else if (this.iconType === 'satellite') {
+            ctx.rect(cx - r/3, cy - r/2, r/1.5, r); // Body
+            // Solar panels
+            ctx.rect(cx - r*1.3, cy - r/3, r*0.9, r/1.5);
+            ctx.rect(cx + r*0.4, cy - r/3, r*0.9, r/1.5);
+            ctx.moveTo(cx - r*0.85, cy - r/3); ctx.lineTo(cx - r*0.85, cy + r/3);
+            ctx.moveTo(cx + r*0.85, cy - r/3); ctx.lineTo(cx + r*0.85, cy + r/3);
+            // Dish
+            ctx.moveTo(cx + r/3, cy - r/2); ctx.lineTo(cx + r/2, cy - r);
+            ctx.moveTo(cx + r/2 + r/3, cy - r); ctx.arc(cx + r/2, cy - r, r/3, 0, Math.PI * 2);
+        }
+        // Traffic Light
+        else if (this.iconType === 'trafficlight') {
+            ctx.rect(cx - r/2, cy - r, r, r*1.6); // Housing
+            ctx.moveTo(cx, cy + r*0.6); ctx.lineTo(cx, cy + r); // Pole
+            ctx.moveTo(cx - r/3, cy + r); ctx.lineTo(cx + r/3, cy + r); // Base
+            // Lamps
+            ctx.moveTo(cx + r/5, cy - r*0.6); ctx.arc(cx, cy - r*0.6, r/5, 0, Math.PI*2);
+            ctx.moveTo(cx + r/5, cy - r*0.1); ctx.arc(cx, cy - r*0.1, r/5, 0, Math.PI*2);
+            ctx.moveTo(cx + r/5, cy + r*0.4); ctx.arc(cx, cy + r*0.4, r/5, 0, Math.PI*2);
+        }
+        // Bicycle
+        else if (this.iconType === 'bicycle') {
+            const wr = r/2.2;
+            ctx.moveTo(cx - r*0.6 + wr, cy + r/3); ctx.arc(cx - r*0.6, cy + r/3, wr, 0, Math.PI*2);
+            ctx.moveTo(cx + r*0.6 + wr, cy + r/3); ctx.arc(cx + r*0.6, cy + r/3, wr, 0, Math.PI*2);
+            // Frame
+            ctx.moveTo(cx - r*0.6, cy + r/3); ctx.lineTo(cx - r*0.1, cy - r/3);
+            ctx.lineTo(cx + r*0.5, cy - r/3); ctx.lineTo(cx + r*0.6, cy + r/3);
+            ctx.moveTo(cx - r*0.1, cy - r/3); ctx.lineTo(cx + r*0.2, cy + r/3);
+            ctx.lineTo(cx + r*0.6, cy + r/3);
+            // Handlebar
+            ctx.moveTo(cx + r*0.5, cy - r/3); ctx.lineTo(cx + r*0.75, cy - r/2);
+        }
+        // Server
+        else if (this.iconType === 'server') {
+            const w = r*1.4, h = r*0.55;
+            for (let i = -1; i <= 1; i++) {
+                const ry = cy + i * (h + r*0.12) - h/2;
+                ctx.rect(cx - w/2, ry, w, h);
+                ctx.moveTo(cx + w/2 - r*0.2, ry + h/2);
+                ctx.arc(cx + w/2 - r*0.25, ry + h/2, r*0.07, 0, Math.PI*2);
+                ctx.moveTo(cx - w/2 + r*0.15, ry + h/2); ctx.lineTo(cx + w/2 - r*0.5, ry + h/2);
+            }
+        }
 
         ctx.stroke();
     }
@@ -225,8 +270,38 @@ class Entity {
     }
 }
 
-for (let i = 0; i < config.entityCount; i++) {
-    entities.push(new Entity());
+// Even coverage
+function spawn() {
+    const count = Math.max(config.minCount, Math.min(config.maxCount,
+        Math.round((width * height) / config.density)));
+    const cols = Math.ceil(Math.sqrt(count * width / height));
+    const rows = Math.ceil(count / cols);
+    const cells = [];
+    for (let r = 0; r < rows; r++)
+        for (let c = 0; c < cols; c++) cells.push([c, r]);
+    cells.sort(() => Math.random() - 0.5);
+
+    entities = cells.slice(0, count).map(([c, r]) => new Entity(
+        (c + 0.15 + Math.random() * 0.7) * (width / cols),
+        (r + 0.15 + Math.random() * 0.7) * (height / rows)
+    ));
+}
+spawn();
+
+function separate() {
+    const min = config.separation;
+    for (let i = 0; i < entities.length; i++) {
+        for (let j = i + 1; j < entities.length; j++) {
+            const a = entities[i], b = entities[j];
+            const dx = b.x - a.x, dy = b.y - a.y;
+            const d = Math.hypot(dx, dy);
+            if (d === 0 || d >= min) continue;
+            const push = ((min - d) / min) * 0.4;
+            const nx = (dx / d) * push, ny = (dy / d) * push;
+            a.x -= nx; a.y -= ny;
+            b.x += nx; b.y += ny;
+        }
+    }
 }
 
 let scanY = 0;
@@ -245,6 +320,7 @@ function animate() {
     ctx.lineWidth = 2;
     ctx.stroke();
 
+    separate();
     entities.forEach(entity => {
         entity.update();
         entity.draw(scanY);
