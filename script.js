@@ -30,6 +30,9 @@ const config = {
 
 function resize() {
     const oldW = width, oldH = height;
+    // Chrome reports a 0-sized viewport for one event while devtools opens. Scaling by it
+    // would pin every entity to (0,0), and 0 * ratio stays 0, so no later resize recovers.
+    if (window.innerWidth <= 0 || window.innerHeight <= 0) return;
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
     // Rescale instead of respawning, so entities don't teleport on resize

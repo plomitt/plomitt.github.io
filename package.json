@@ -1,0 +1,5 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": { "test": "node --check ask.js && node --check search.js && node --test test/*.test.mjs" }
+}

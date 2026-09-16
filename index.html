@@ -21,6 +21,7 @@
             <div class="logo">Plomitt</div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
+                <li><a href="#ask">Ask</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#education">Education</a></li>
@@ -44,6 +45,27 @@
                 </div>
             </div>
         </header>
+
+        <section id="ask">
+            <h2>Ask about my background</h2>
+            <div class="card static-card">
+                <p class="ask-intro">Type a question and this page will find the parts of my CV that answer it.
+                A small embedding model (~23&nbsp;MB) runs <strong>entirely in your browser</strong> — no server, no API key,
+                nothing leaves your device. Results are the exact text from this page, never generated, so nothing can be made up.</p>
+                <form id="ask-form" autocomplete="off" onsubmit="return false">
+                    <label class="sr-only" for="ask-input">Ask a question about Timofei</label>
+                    <input id="ask-input" type="search" placeholder="Does he have experience with computer vision?">
+                    <button type="submit" class="btn primary">Ask</button>
+                </form>
+                <p class="ask-examples">Try:
+                    <button type="button" class="ask-example">Has he used PyTorch?</button>
+                    <button type="button" class="ask-example">Tell me about his robotics competitions</button>
+                    <button type="button" class="ask-example">Is he available for remote work in Europe?</button>
+                </p>
+                <p id="ask-status" class="ask-status" role="status" aria-live="polite"></p>
+                <div id="ask-results" class="ask-results"></div>
+            </div>
+        </section>
 
         <section id="skills">
             <h2>Skills</h2>
@@ -351,6 +373,7 @@
     </div>
 
     <script src="script.js"></script>
+    <script type="module" src="ask.js"></script>
     <script>
         feather.replace();
     </script>
