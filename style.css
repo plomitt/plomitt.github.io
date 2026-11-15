@@ -393,3 +393,8 @@ footer { padding: 100px 0 50px; text-align: center; }
 }
 
 .ask-hit-meta { color: var(--accent); font-size: 0.8rem; margin-bottom: 8px; opacity: 0.8; }
+
+/* Quiet text links beside a project title */
+.project-links { margin-top: 4px; font-family: var(--font-head); font-size: 0.9rem; color: var(--text-dim); }
+.project-links a { color: var(--accent); }
+.project-links a:hover { text-decoration: underline; }

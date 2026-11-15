@@ -43,7 +43,7 @@ function collectChunks() {
     });
 
     const contact = document.querySelector('#contact');
-    add(contact, 'Contact', 'Get in touch', 'Belgrade, Serbia', clean(contact.querySelector('.email-link').textContent) + ' — open to AI / LLM Engineer roles in the EU or remote.');
+    add(contact, 'Contact', 'Get in touch', 'Belgrade, Serbia', clean(contact.querySelector('.email-link').textContent) + ' — open to AI / LLM and software engineering roles, remote as a B2B contractor.');
 
     return chunks;
 }
