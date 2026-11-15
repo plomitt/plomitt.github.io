@@ -296,3 +296,8 @@ footer { padding: 100px 0 50px; text-align: center; }
         font-size: 1.2rem;
     }
 }
+
+/* Quiet text links beside a project title */
+.project-links { margin-top: 4px; font-family: var(--font-head); font-size: 0.9rem; color: var(--text-dim); }
+.project-links a { color: var(--accent); }
+.project-links a:hover { text-decoration: underline; }
